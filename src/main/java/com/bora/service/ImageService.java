@@ -1,19 +1,14 @@
 package com.bora.service;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.FileSystemUtils;
 
 import com.bora.model.Image;
 import com.bora.repository.ImageRepository;
@@ -36,7 +31,8 @@ public class ImageService {
 	}
 	
 	public Flux<Image> findAllImages() {
-		return imageRepository.findAll();
+		return imageRepository.findAll()
+				.log("findAll");
 	}
 	
 	public Mono<Resource> findOneImage(String fileName) {
@@ -85,6 +81,7 @@ public class ImageService {
 		return Mono.when(deleteDatabaseImage, deleteFile).then();
 	}
 	
+	/*
 	@Bean
 	CommandLineRunner setUp() throws IOException {
 		return args -> {
@@ -97,6 +94,7 @@ public class ImageService {
 			FileCopyUtils.copy("test file3", new FileWriter(UPLOAD_ROOT + "/file3.jpg"));		
 		};
 	}
+	*/
 	
 
 }

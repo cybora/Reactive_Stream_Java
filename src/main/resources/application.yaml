@@ -1,5 +1,11 @@
-#logging:
- # level:
-  #  io:
-   #   netty: DEBUG
-    #reactor: DEBUG
+logging:
+  level:
+    com:
+      bora: DEBUG
+    org:
+      springframework:
+        data: TRACE
+      reactor:
+      core: TRACE
+      
+        
